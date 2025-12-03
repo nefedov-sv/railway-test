@@ -1,20 +1,29 @@
 module.exports = {
   development: {
-    username: process.env.DB_USER,
-    password: null,
-    database: 'todo-example',
-    host: '127.0.0.1',
+    use_env_variable: 'DATABASE_URL',
     dialect: 'postgres',
-    // The below line is added to stop a deprecation warning
-    // https://github.com/sequelize/sequelize/issues/8417
-    operatorsAliases: false
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false
+      }
+    }
   },
   test: {
     username: 'postgres',
     password: null,
     database: 'todo-example-test',
     host: '127.0.0.1',
+    dialect: 'postgres'
+  },
+  production: {
+    use_env_variable: 'DATABASE_URL',
     dialect: 'postgres',
-    operatorsAliases: false
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false
+      }
+    }
   }
 };
